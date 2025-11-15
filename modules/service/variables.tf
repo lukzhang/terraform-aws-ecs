@@ -217,11 +217,11 @@ variable "vpc_id" {
 
 variable "ordered_placement_strategy" {
   description = "Service level strategy rules that are taken into consideration during task placement. List from top to bottom in order of precedence"
-  type = map(object({
+  type = list(object({
     field = optional(string)
     type  = string
   }))
-  default = null
+  default = []
 }
 
 variable "placement_constraints" {

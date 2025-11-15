@@ -80,7 +80,7 @@ module "wrapper" {
   memory                                       = try(each.value.memory, var.defaults.memory, 2048)
   name                                         = try(each.value.name, var.defaults.name, null)
   network_mode                                 = try(each.value.network_mode, var.defaults.network_mode, "awsvpc")
-  ordered_placement_strategy                   = try(each.value.ordered_placement_strategy, var.defaults.ordered_placement_strategy, null)
+  ordered_placement_strategy                   = try(each.value.ordered_placement_strategy, var.defaults.ordered_placement_strategy, [])
   pid_mode                                     = try(each.value.pid_mode, var.defaults.pid_mode, null)
   placement_constraints                        = try(each.value.placement_constraints, var.defaults.placement_constraints, null)
   platform_version                             = try(each.value.platform_version, var.defaults.platform_version, null)

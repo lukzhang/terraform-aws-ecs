@@ -151,7 +151,7 @@ resource "aws_ecs_service" "this" {
   }
 
   dynamic "ordered_placement_strategy" {
-    for_each = var.ordered_placement_strategy != null ? var.ordered_placement_strategy : {}
+    for_each = var.ordered_placement_strategy # Must use the simplified list iteration
 
     content {
       field = ordered_placement_strategy.value.field
@@ -159,12 +159,12 @@ resource "aws_ecs_service" "this" {
     }
   }
 
-  dynamic "placement_constraints" {
-    for_each = var.placement_constraints != null ? var.placement_constraints : {}
+  dynamic "ordered_placement_strategy" {      # Revert dynamic block name to the OLD one
+    for_each = var.ordered_placement_strategy # Keep the new, correct list iteration
 
     content {
-      expression = placement_constraints.value.expression
-      type       = placement_constraints.value.type
+      field = ordered_placement_strategy.value.field
+      type  = ordered_placement_strategy.value.type
     }
   }
 
@@ -474,7 +474,7 @@ resource "aws_ecs_service" "ignore_task_definition" {
   }
 
   dynamic "ordered_placement_strategy" {
-    for_each = var.ordered_placement_strategy != null ? var.ordered_placement_strategy : {}
+    for_each = var.ordered_placement_strategy
 
     content {
       field = ordered_placement_strategy.value.field
