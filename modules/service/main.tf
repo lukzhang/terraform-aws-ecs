@@ -159,15 +159,6 @@ resource "aws_ecs_service" "this" {
     }
   }
 
-  dynamic "ordered_placement_strategy" {      # Revert dynamic block name to the OLD one
-    for_each = var.ordered_placement_strategy # Keep the new, correct list iteration
-
-    content {
-      field = ordered_placement_strategy.value.field
-      type  = ordered_placement_strategy.value.type
-    }
-  }
-
   # Set by task set if deployment controller is external
   platform_version    = local.is_fargate && !local.is_external_deployment ? var.platform_version : null
   propagate_tags      = var.propagate_tags
